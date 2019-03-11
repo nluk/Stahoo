@@ -3,7 +3,7 @@ package pl.grupowy.stahoo.Entities
 
 import java.util.*
 
-
+//
 
 open class BasicOperation{
     var id:Int = 0

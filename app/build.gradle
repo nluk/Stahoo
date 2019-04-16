@@ -13,13 +13,21 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions "production"
+    productFlavors {
+        production {
+            buildConfigField "String", "PROTOCOL", "http"
+            buildConfigField "String", "HOST", "mateuszk.pythonanywhere.com"
+            buildConfigField "String", "PATH", "api_stahoo"
         }
     }
 }

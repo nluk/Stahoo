@@ -1,11 +1,11 @@
-package pl.grupowy.stahoo.Entities
+package pl.grupowy.stahoo.entities
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class User {
     @Expose
-    var id: Int=0
+    var id: Int = 0
 
     @Expose
     var username: String = ""

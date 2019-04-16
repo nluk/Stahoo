@@ -1,17 +1,16 @@
-package pl.grupowy.stahoo.Entities
+package pl.grupowy.stahoo.entities
 
 import android.arch.persistence.room.Entity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import pl.grupowy.stahoo.entities.enums.OperationType
 import java.util.*
 
-@Entity(primaryKeys = arrayOf("id"))
-class MainOperation : BasicOperation(){
-
-
+@Entity(primaryKeys = ["id"])
+class MainOperation : BasicOperation() {
     @Expose
     @SerializedName("target_user")
-    var debtUserId:Int = 0
+    var debtUserId: Int = 0
 
     @Expose
     @SerializedName("name")
@@ -34,12 +33,12 @@ class MainOperation : BasicOperation(){
     var dateTime: Date = Date()
 
     @Expose
-    var category:Int = 0
+    var category: Int = 0
 
     @Expose
-    var partials:List<SubOperation> = emptyList()
+    var partials: List<SubOperation> = emptyList()
 
     @Expose
-    @SerializedName("operation_tpe")
-    var type:OperationType = OperationType.INCOME
+    @SerializedName("operation_type")
+    var type: OperationType = OperationType.INCOME
 }

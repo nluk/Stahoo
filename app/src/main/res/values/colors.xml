@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="navBarPrimary">#B2FF59</color>
+    <color name="navBarAccent">#E64A19</color>
+    <color name="navBarDark">#558B2F</color>
+    <color name="navBarSecondary">#00ACC1</color>
+    <color name="fabLight">#CBF8FF</color>
 </resources>

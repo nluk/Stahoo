@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_register_login"
+            app:startDestination="@id/splashScreenFragment">
+    <fragment android:id="@+id/splashScreenFragment" android:name="pl.grupowy.stahoo.fragments.SplashScreenFragment"
+              android:label="SplashScreenFragment">
+        <action android:id="@+id/action_splashScreenFragment_to_loginFragment" app:destination="@id/loginFragment"
+                app:popUpTo="@id/navigation_register_login" app:popUpToInclusive="true"
+                app:launchSingleTop="false"/>
+    </fragment>
+    <fragment android:id="@+id/loginFragment" android:name="pl.grupowy.stahoo.fragments.LoginFragment"
+              android:label="LoginFragment">
+        <action android:id="@+id/action_loginFragment_to_registerFragment" app:destination="@id/registerFragment"/>
+    </fragment>
+    <fragment android:id="@+id/registerFragment" android:name="pl.grupowy.stahoo.fragments.RegisterFragment"
+              android:label="RegisterFragment">
+        <action android:id="@+id/action_registerFragment_to_loginFragment" app:destination="@id/loginFragment"/>
+    </fragment>
+</navigation>

@@ -28,9 +28,6 @@ class SplashScreenFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val navController = findNavController(nav_host_fragment)
-        textView.setOnClickListener{
-            findNavController(nav_host_fragment).navigate(R.id.action_splashScreenFragment_to_loginFragment)
-        }
     }
 
     companion object {

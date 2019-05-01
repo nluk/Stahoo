@@ -4,17 +4,25 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_register_login"
             app:startDestination="@id/splashScreenFragment">
     <fragment android:id="@+id/splashScreenFragment" android:name="pl.grupowy.stahoo.fragments.SplashScreenFragment"
-              android:label="SplashScreenFragment">
+              android:label="SplashScreenFragment"
+    tools:layout="@layout/fragment_splashscreen">
         <action android:id="@+id/action_splashScreenFragment_to_loginFragment" app:destination="@id/loginFragment"
                 app:popUpTo="@id/navigation_register_login" app:popUpToInclusive="true"
                 app:launchSingleTop="false"/>
     </fragment>
     <fragment android:id="@+id/loginFragment" android:name="pl.grupowy.stahoo.fragments.LoginFragment"
-              android:label="LoginFragment">
+              android:label="LoginFragment"
+    tools:layout="@layout/fragment_login_register">
         <action android:id="@+id/action_loginFragment_to_registerFragment" app:destination="@id/registerFragment"/>
+        <action android:id="@+id/action_loginFragment_to_mainActivity" app:destination="@id/mainActivity"
+                app:popUpTo="@+id/mainActivity" app:popUpToInclusive="true"/>
     </fragment>
     <fragment android:id="@+id/registerFragment" android:name="pl.grupowy.stahoo.fragments.RegisterFragment"
-              android:label="RegisterFragment">
-        <action android:id="@+id/action_registerFragment_to_loginFragment" app:destination="@id/loginFragment"/>
+              android:label="RegisterFragment"
+    tools:layout="@layout/fragment_register_form">
+        <action android:id="@+id/action_registerFragment_to_loginFragment" app:destination="@id/loginFragment"
+                app:popUpTo="@+id/loginFragment" app:popUpToInclusive="true"/>
     </fragment>
+    <activity android:id="@+id/mainActivity" android:name="pl.grupowy.stahoo.activities.MainActivity"
+              android:label="activity_main" tools:layout="@layout/activity_main"/>
 </navigation>

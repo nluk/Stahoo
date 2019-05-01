@@ -3,16 +3,35 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
                                                    tools:context=".fragments.SplashScreenFragment"
-
+                                                   android:background="@drawable/background_gradient_splashscreen"
                                                    android:focusable="true">
 
-    <TextView
-            android:text="Welcome to Stahoo"
+
+    <ImageView
+            android:src="@drawable/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-    />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    <ImageView
+            android:src="@drawable/forest_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="fitEnd"
+            android:translationY="48dp"
+            android:focusable="false"
+            android:clickable="false"
+            android:scaleX="1.5"
+            />
 </androidx.constraintlayout.widget.ConstraintLayout>

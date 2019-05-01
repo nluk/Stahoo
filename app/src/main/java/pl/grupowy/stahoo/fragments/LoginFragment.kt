@@ -48,12 +48,5 @@ class LoginFragment : Fragment() {
         fun onSuccesfulLogin(userToken: String)
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            LoginFragment().apply {}
-    }
-
-
 
 }

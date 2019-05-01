@@ -15,8 +15,8 @@ class LoginRegisterActivity : FragmentActivity(), LoginFragment.SuccessfulLoginL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_register)
-        val host = NavHostFragment.create(R.navigation.navigation_register_login)
-        supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment,host).setPrimaryNavigationFragment(host).commit()
+        //val host = NavHostFragment.create(R.navigation.navigation_register_login)
+        //supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment,host).setPrimaryNavigationFragment(host).commit()
     }
 
 }

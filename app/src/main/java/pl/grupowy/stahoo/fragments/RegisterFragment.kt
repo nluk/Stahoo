@@ -23,8 +23,8 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        container?.clearDisappearingChildren()
-        container?.removeAllViews()
+        //container?.clearDisappearingChildren()
+        //container?.removeAllViews()
         return inflater.inflate(R.layout.fragment_register_form,container,false)
     }
 

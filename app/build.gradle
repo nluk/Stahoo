@@ -48,6 +48,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.exifinterface:exifinterface:1.0.0'
 
+    //Rounded ImageView
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+
 
     /* Picasso lib for image loading  */
     implementation 'com.squareup.picasso:picasso:2.71828'

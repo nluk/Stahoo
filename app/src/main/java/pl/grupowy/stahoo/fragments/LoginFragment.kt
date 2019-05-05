@@ -8,6 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.fragment_login_register.*
 import pl.grupowy.stahoo.R
 
 
@@ -23,12 +26,15 @@ class LoginFragment : Fragment() {
     private var listener: SuccessfulLoginListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //container?.clearDisappearingChildren()
-        //container?.removeAllViews()
-        return inflater.inflate(R.layout.fragment_login_register,container,false)
+        val layout = inflater.inflate(R.layout.fragment_login_register,container,false)
+
+        return layout
     }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setListeners()
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -46,6 +52,16 @@ class LoginFragment : Fragment() {
 
     interface SuccessfulLoginListener {
         fun onSuccesfulLogin(userToken: String)
+    }
+
+    fun setListeners(){
+        signInButton.setOnClickListener {signIn()}
+        registerView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_loginFragment_to_registerFragment,null))
+    }
+
+    fun signIn(){
+        //TODO Add login logic
+        findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
     }
 
 

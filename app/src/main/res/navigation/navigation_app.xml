@@ -2,7 +2,34 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph"
-            app:startDestination="@id/splashScreenFragment2">
-    <fragment android:id="@+id/splashScreenFragment2" android:name="pl.grupowy.stahoo.fragments.SplashScreenFragment"
-              android:label="SplashScreenFragment"/>
+            app:startDestination="@id/operationsListFragment">
+    <fragment
+            android:id="@+id/operationsListFragment"
+            android:name="pl.grupowy.stahoo.fragments.OperationsListFragment"
+            tools:layout="@layout/fragment_operations_list"
+            android:label="OperationsListFragment">
+        <action
+                android:id="@+id/action_operationsListFragment_to_operationHandlerFragment"
+                app:destination="@id/operationHandlerFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/operationHandlerFragment"
+            android:name="pl.grupowy.stahoo.fragments.OperationHandlerFragment"
+            android:label="fragment_operation_handler"
+            tools:layout="@layout/fragment_operation_handler">
+        <action
+                android:id="@+id/action_operationHandlerFragment_to_operationsListFragment"
+                app:destination="@id/operationsListFragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/friendsListFragment"
+            android:name="pl.grupowy.stahoo.fragments.FriendsListFragment"
+            tools:layout="@layout/fragment_friends_list"/>
+
+    <fragment
+            android:id="@+id/statisticsFragment"
+            android:name="pl.grupowy.stahoo.fragments.StatisticsFragment"
+            tools:layout="@layout/fragment_statistics"/>
+
 </navigation>

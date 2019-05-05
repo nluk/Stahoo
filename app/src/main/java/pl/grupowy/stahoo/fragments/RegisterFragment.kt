@@ -7,31 +7,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.fragment_register_form.*
 import pl.grupowy.stahoo.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class RegisterFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //container?.clearDisappearingChildren()
-        //container?.removeAllViews()
         return inflater.inflate(R.layout.fragment_register_form,container,false)
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            RegisterFragment().apply {}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setListeners()
     }
+
+    private fun setListeners() {
+        registerButton.setOnClickListener { attemptRegistration() }
+    }
+
+    private fun attemptRegistration() {
+        var nickname = nicknameInput.text.toString()
+        var email = emailInput.text.toString()
+        var password = passwordInput.text.toString()
+
+        //TODO registration API
+        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+    }
+
 
 }

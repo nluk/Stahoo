@@ -40,6 +40,7 @@ ext {
     daggerVersion = '2.17'
     retrofitVersion = '2.3.0'
     rxJavaVersion = '2.0.6'
+    roomVersion = '2.0.0'
 }
 
 dependencies {
@@ -62,10 +63,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
     /* Android Architecture Component - Room Persistance Lib  */
-    implementation 'androidx.room:room-runtime:2.0.0'
-    implementation 'androidx.room:room-rxjava2:2.0.0'
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    kapt 'androidx.room:room-compiler:2.0.0'
+    kapt "androidx.room:room-compiler:$roomVersion"
 
     /* Dagger2 - We are going to use dagger.android which includes
      * support for Activity and fragment injection so we need to include

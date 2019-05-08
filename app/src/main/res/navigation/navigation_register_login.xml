@@ -9,6 +9,7 @@
         <action android:id="@+id/action_splashScreenFragment_to_loginFragment" app:destination="@id/loginFragment"
                 app:popUpTo="@id/navigation_register_login" app:popUpToInclusive="true"
                 app:launchSingleTop="false"/>
+        <action android:id="@+id/action_splashScreenFragment_to_mainActivity" app:destination="@id/mainActivity"/>
     </fragment>
     <fragment android:id="@+id/loginFragment" android:name="pl.grupowy.stahoo.fragments.LoginFragment"
               android:label="LoginFragment"

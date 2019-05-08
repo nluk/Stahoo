@@ -12,7 +12,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_login_register.*
 import pl.grupowy.stahoo.R
-
+import pl.grupowy.stahoo.application.App
 
 
 /**

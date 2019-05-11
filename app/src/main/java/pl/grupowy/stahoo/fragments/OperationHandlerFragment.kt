@@ -1,35 +1,20 @@
 package pl.grupowy.stahoo.fragments
 
 import android.content.Context
-import android.net.Uri
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-
 import pl.grupowy.stahoo.R
 import pl.grupowy.stahoo.entities.MainOperation
 
-
-class OperationHandlerFragment : Fragment() {
+class OperationHandlerFragment : BaseFragment() {
     private var listener: OperationStatusListener? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_operation_handler, container, false)
-    }
-
+    override fun layoutRes(): Int = R.layout.fragment_operation_handler
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OperationStatusListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OperationStatusListener")
+            throw RuntimeException("$context must implement OperationStatusListener")
         }
     }
 

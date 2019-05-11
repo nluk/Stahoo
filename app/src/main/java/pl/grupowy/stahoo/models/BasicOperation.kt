@@ -1,4 +1,4 @@
-package pl.grupowy.stahoo.entities
+package pl.grupowy.stahoo.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

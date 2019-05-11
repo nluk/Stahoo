@@ -4,6 +4,8 @@ import androidx.room.Entity
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import pl.grupowy.stahoo.entities.enums.OperationType
+import pl.grupowy.stahoo.models.BasicOperation
+import pl.grupowy.stahoo.models.SubOperation
 import java.util.*
 
 @Entity(primaryKeys = ["id"])

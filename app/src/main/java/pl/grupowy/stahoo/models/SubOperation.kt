@@ -1,4 +1,4 @@
-package pl.grupowy.stahoo.entities
+package pl.grupowy.stahoo.models
 
 class SubOperation : BasicOperation() {
     var isAccepted: Boolean = false

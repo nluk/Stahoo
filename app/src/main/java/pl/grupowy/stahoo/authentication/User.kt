@@ -6,12 +6,12 @@ import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import pl.grupowy.stahoo.authentication.Store.Companion.TABLE_NAME
+import pl.grupowy.stahoo.authentication.User.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
 class User {
     @Expose
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     var id: Int = 0
 
     @Expose

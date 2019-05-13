@@ -4,6 +4,7 @@ import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import pl.grupowy.stahoo.di.component.AppComponent
 import pl.grupowy.stahoo.di.component.DaggerAppComponent
+
 import pl.grupowy.stahoo.di.modules.AppModule
 import pl.grupowy.stahoo.di.modules.NetworkModule
 

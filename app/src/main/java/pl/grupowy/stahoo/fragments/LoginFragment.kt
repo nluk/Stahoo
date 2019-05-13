@@ -3,19 +3,13 @@ package pl.grupowy.stahoo.fragments
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_login_register.*
 import pl.grupowy.stahoo.R
+import pl.grupowy.stahoo.interfaces.SuccessfulLoginListener
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [LoginFragment.SuccessfulLoginListener] interface
- * to handle interaction events.
- *
- */
+
 class LoginFragment : BaseFragment() {
     private var listener: SuccessfulLoginListener? = null
 
@@ -40,15 +34,11 @@ class LoginFragment : BaseFragment() {
         listener = null
     }
 
-    interface SuccessfulLoginListener {
-        fun onSuccessfulLogin(userToken: String)
-    }
-
     private fun setListeners() {
         signInButton.setOnClickListener { signIn() }
         registerView.setOnClickListener(
             Navigation.createNavigateOnClickListener(
-                R.id.action_loginFragment_to_registerFragment,
+                R.id.action_to_registration_form,
                 null
             )
         )
@@ -56,7 +46,7 @@ class LoginFragment : BaseFragment() {
 
     fun signIn() {
         //TODO Add login logic
-        findNavController().navigate(R.id.action_loginFragment_to_mainActivity)
+        findNavController().navigate(R.id.action_new_login)
     }
 
 }

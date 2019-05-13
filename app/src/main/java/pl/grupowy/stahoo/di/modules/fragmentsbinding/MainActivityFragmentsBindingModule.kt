@@ -2,10 +2,7 @@ package pl.grupowy.stahoo.di.modules.fragmentsbinding
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import pl.grupowy.stahoo.fragments.FriendsListFragment
-import pl.grupowy.stahoo.fragments.OperationHandlerFragment
-import pl.grupowy.stahoo.fragments.OperationsListFragment
-import pl.grupowy.stahoo.fragments.StatisticsFragment
+import pl.grupowy.stahoo.fragments.*
 
 @Module
 abstract class MainActivityFragmentsBindingModule {
@@ -14,7 +11,10 @@ abstract class MainActivityFragmentsBindingModule {
     internal abstract fun provideFriendsListFragment(): FriendsListFragment
 
     @ContributesAndroidInjector
-    internal abstract fun provideOperationHandlerFragment(): OperationHandlerFragment
+    internal  abstract fun provideAddEditOperationFragment() : AddEditOperationFragment
+
+    @ContributesAndroidInjector
+    internal  abstract fun provideViewOperationFragment() : ViewOperationFragment
 
     @ContributesAndroidInjector
     internal abstract fun provideOperationsListFragment(): OperationsListFragment

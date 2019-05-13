@@ -25,7 +25,7 @@ class RegisterFragment : BaseFragment() {
         var password = passwordInput.text.toString()
 
         //TODO registration API
-        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        findNavController().navigate(R.id.action_registration_completed)
     }
 
 }

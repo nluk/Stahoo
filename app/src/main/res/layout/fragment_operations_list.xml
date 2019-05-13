@@ -5,11 +5,42 @@
              tools:context=".fragments.FriendsListFragment"
         >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="OPERATIONS_LIST"
-            />
+            android:orientation="vertical"
+            android:weightSum="10"
+            >
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:weightSum="5"
+                >
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Month"
+                    android:layout_weight="3"
+                    android:id="@+id/operations_month_selector"
+                    android:gravity="center"
+                    />
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="Year"
+                    android:id="@+id/operations_year_selector"
+                    android:gravity="center"/>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/operations_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="9"
+                ></androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
 
 </FrameLayout>

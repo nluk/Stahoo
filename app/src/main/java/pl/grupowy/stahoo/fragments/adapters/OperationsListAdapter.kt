@@ -5,15 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.main_operation_layout.view.*
 import pl.grupowy.stahoo.R
 import pl.grupowy.stahoo.entities.MainOperation
 
-class OperationsListAdapter(val operationsList : List<MainOperation>) : RecyclerView.Adapter<OperationsListAdapter.OperationsViewHolder>() {
+class OperationsListAdapter(val operationsList : List<MainOperation>, val clickCallback : ClickCallback) : RecyclerView.Adapter<OperationsListAdapter.OperationsViewHolder>() {
+
+    interface ClickCallback{
+        fun onItemClick(position: Int)
+    }
 
     override fun onBindViewHolder(holder: OperationsViewHolder, position: Int) {
         holder.bindItems(operationsList[position])
+        holder.itemView.setOnClickListener {
+            clickCallback.onItemClick(holder.adapterPosition)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OperationsViewHolder {
@@ -23,10 +31,13 @@ class OperationsListAdapter(val operationsList : List<MainOperation>) : Recycler
 
     override fun getItemCount(): Int = operationsList.size
 
-
-
     class OperationsViewHolder(view : View) : RecyclerView.ViewHolder(view){
+
+
+
         fun bindItems(operation:MainOperation){
+
+
             itemView.operation_amount.text = operation.amount.toString()
             itemView.operation_title.text = operation.name
            if(operation.isCyclical) itemView.operation_is_cyclical.setImageResource(R.drawable.ic_cyclical_operation)

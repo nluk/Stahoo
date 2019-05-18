@@ -23,6 +23,9 @@
         <action
                 android:id="@+id/action_addedit_operation_back_to_list"
                 app:destination="@id/operationsListFragment"/>
+        <argument
+                android:name="editedOperationId"
+                app:argType="long"/>
     </fragment>
     <fragment
             android:id="@+id/viewOperationFragment"
@@ -32,6 +35,9 @@
         <action
                 android:id="@+id/action_view_back_to_list"
                 app:destination="@id/operationsListFragment"/>
+        <argument
+                android:name="viewedOperationId"
+                app:argType="long"/>
     </fragment>
     <fragment
             android:id="@+id/statisticsFragment"

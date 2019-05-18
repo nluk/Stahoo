@@ -1,12 +1,21 @@
 package pl.grupowy.stahoo.fragments
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.EditText
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.dialog_year_select.*
+import kotlinx.android.synthetic.main.dialog_year_select.view.*
 import kotlinx.android.synthetic.main.fragment_operations_list.*
 import pl.grupowy.stahoo.R
 import pl.grupowy.stahoo.entities.MainOperation
 import pl.grupowy.stahoo.fragments.adapters.OperationsListAdapter
+import java.util.*
+import kotlin.collections.ArrayList
 
 class OperationsListFragment : BaseFragment() {
 
@@ -28,29 +37,44 @@ class OperationsListFragment : BaseFragment() {
     private fun init() {
         //TODO("Pobrac obecny rok,miesiac, pobrac dane")
         operations_recycler.adapter = operationsAdapter
-        //getYearAndMonth()
+        getYearAndMonth()
+        displayDate()
         fetchDataFromDB()
 
     }
 
     private fun setListeners() {
         operations_month_selector.setOnClickListener{
-            selectMonth()
+            AlertDialog.Builder(context!!)
+                .setTitle(R.string.select_month)
+                .setItems(R.array.months_array) {
+                        dialog, which ->
+                    operationMonth = which
+                    displayDate()
+                }
+                .setNegativeButton(R.string.cancel) { dialog, id -> dialog.cancel() }
+                .create().show()
             fetchDataFromDB()
         }
         operations_year_selector.setOnClickListener{
-            selectYear()
+            val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_year_select,null)
+            AlertDialog.Builder(context!!)
+                .setTitle(R.string.select_year)
+                .setView(dialogView)
+                .setNegativeButton(R.string.cancel) { dialog, id -> dialog.cancel() }
+                .setPositiveButton(R.string.select) { dialog, id ->
+                    operationYear =  (dialog as AlertDialog).operation_year_value.text.toString().toInt()
+                    displayDate()
+                }
+                .create().show()
             fetchDataFromDB()
+        }
+        add_operation_fab.setOnClickListener {
+            findNavController().navigate(R.id.action_add_or_edit_operation)
         }
     }
 
-    private fun selectYear() {
-        TODO("Dialog wyboru roku") //To change body of created functions use File | Settings | File Templates.
-    }
 
-    private fun selectMonth() {
-        TODO("Dialog wyboru miesiaca")
-    }
 
     private fun fetchDataFromDB() {
         //TODO("Dodać wyciąganie z bazy na podstawie daty")
@@ -58,8 +82,17 @@ class OperationsListFragment : BaseFragment() {
         //operationsAdapter.notifyDataSetChanged()
     }
 
+    private fun getYearAndMonth(){
+        val calendar =  Calendar.getInstance()
+        operationMonth = calendar[Calendar.MONTH]
+        operationYear = calendar[Calendar.YEAR]
+        displayDate()
+    }
 
-
+    private fun displayDate() {
+        operations_month_selector.text = resources.getStringArray(R.array.months_array)[operationMonth]
+        operations_year_selector.text = operationYear.toString()
+    }
 
 
 }

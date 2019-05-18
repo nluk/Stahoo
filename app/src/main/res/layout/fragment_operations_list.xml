@@ -1,46 +1,85 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".fragments.FriendsListFragment"
         >
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:weightSum="10"
+            android:id="@+id/linearLayout"
             >
+
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_weight="1"
                 android:weightSum="5"
+                android:id="@+id/linearLayout3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/operations_recycler"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 >
+
             <TextView
+                    android:padding="8dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="Month"
                     android:layout_weight="3"
                     android:id="@+id/operations_month_selector"
                     android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
                     />
+
             <TextView
+                    android:padding="8dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:text="Year"
                     android:id="@+id/operations_year_selector"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
+                    />
         </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/operations_recycler"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="9"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
                 ></androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:src="@drawable/fab_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/add_operation_fab"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </FrameLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_graph"
+            app:startDestination="@id/operationsListFragment">
+    <fragment
+            android:id="@+id/operationsListFragment"
+            android:name="pl.grupowy.stahoo.fragments.OperationsListFragment"
+            tools:layout="@layout/fragment_operations_list"
+            android:label="OperationsListFragment">
+        <action
+                android:id="@+id/action_add_or_edit_operation"
+                app:destination="@id/addEditOperationFragment"/>
+        <action
+                android:id="@+id/action_view_operation"
+                app:destination="@id/viewOperationFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/addEditOperationFragment"
+            android:name="pl.grupowy.stahoo.fragments.AddEditOperationFragment"
+            android:label="fragment_add_edit_operation"
+            tools:layout="@layout/fragment_add_edit_operation">
+        <action
+                android:id="@+id/action_addedit_operation_back_to_list"
+                app:destination="@id/operationsListFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/viewOperationFragment"
+            android:name="pl.grupowy.stahoo.fragments.ViewOperationFragment"
+            android:label="fragment_view_operation"
+            tools:layout="@layout/fragment_view_operation">
+        <action
+                android:id="@+id/action_view_back_to_list"
+                app:destination="@id/operationsListFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/statisticsFragment"
+            android:name="pl.grupowy.stahoo.fragments.StatisticsFragment"
+            tools:layout="@layout/fragment_statistics"
+            android:label="StatisticsFragment"/>
+    <fragment
+            android:id="@+id/friendsListFragment"
+            android:name="pl.grupowy.stahoo.fragments.FriendsListFragment"
+            tools:layout="@layout/fragment_statistics"/>
+
+</navigation>

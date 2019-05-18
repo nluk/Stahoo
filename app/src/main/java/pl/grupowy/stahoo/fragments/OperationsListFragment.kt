@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.fragment_operations_list.*
 import pl.grupowy.stahoo.R
 import pl.grupowy.stahoo.entities.MainOperation
 import pl.grupowy.stahoo.fragments.adapters.OperationsListAdapter
+import pl.grupowy.stahoo.fragments.dialogs.MonthSelectorDialog
+import pl.grupowy.stahoo.fragments.dialogs.OperationActionDialog
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -37,11 +39,22 @@ class OperationsListFragment : BaseFragment() {
 
         val adapterOnClick = object : OperationsListAdapter.ClickCallback{
             override fun onItemClick(position: Int) {
-//                findNavController().navigate(R.id.action_add_or_edit_operation, Bundle().apply {
-//                    putInt("operationId",operationsList[position].id)
-//                })
-                Toast.makeText(context,operationsList[position].name,Toast.LENGTH_SHORT).show()
-
+                val operation = operationsList[position]
+                OperationActionDialog(context!!,
+                    deleteAction = {
+                        //TODO("Add operation deleting")
+                    },
+                    editAction = {
+                        findNavController().navigate(R.id.action_add_or_edit_operation,Bundle().apply {
+                            putInt("operationId",operation.id)
+                        })
+                    },
+                    viewAction = {
+                        findNavController().navigate(R.id.action_view_operation,Bundle().apply {
+                            putInt("operationId",operation.id)
+                        })
+                    }
+                    ).show()
             }
         }
         operationsListAdapter = OperationsListAdapter(operationsList,adapterOnClick)
@@ -129,15 +142,12 @@ class OperationsListFragment : BaseFragment() {
     }
 
     private fun getMonthFromDialog(){
-        AlertDialog.Builder(context!!)
-            .setTitle(R.string.select_month)
-            .setItems(R.array.months_array) {
-                    _, which ->
-                operationMonth = which
-                refresh()
+        MonthSelectorDialog(context!!,object: MonthSelectorDialog.OnMonthSelectedHandler{
+            override fun onMonthSelected(whichMonth: Int) {
+                operations_month_selector.text = resources.getStringArray(R.array.months_array)[whichMonth]
+                operationMonth = whichMonth
             }
-            .setNegativeButton(R.string.cancel) { dialog, id -> dialog.cancel() }
-            .create().show()
+        }).show()
     }
 
     private fun refresh(){

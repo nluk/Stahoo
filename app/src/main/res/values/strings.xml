@@ -20,6 +20,10 @@
     <string name="last_name">last name</string>
     <string name="save">save</string>
     <string name="add">add</string>
+    <string name="invite_friend">Invite friend</string>
+    <string name="remove_friend">Remove friend?</string>
+    <string name="amount">amount</string>
+    <string name="add_split">Add split</string>
 
     <string-array name="months_array">
         <item>January</item>

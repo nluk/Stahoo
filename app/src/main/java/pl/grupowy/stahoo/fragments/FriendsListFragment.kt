@@ -9,7 +9,8 @@ import pl.grupowy.stahoo.authentication.User
 import pl.grupowy.stahoo.fragments.adapters.FriendInviteAdapter
 import pl.grupowy.stahoo.fragments.adapters.SubOperationAdapter
 import pl.grupowy.stahoo.fragments.adapters.FriendsListAdapter
-
+import pl.grupowy.stahoo.fragments.dialogs.InviteFriendDialog
+import pl.grupowy.stahoo.fragments.dialogs.RemoveFriendDialog
 
 
 class FriendsListFragment : BaseFragment() {
@@ -18,8 +19,11 @@ class FriendsListFragment : BaseFragment() {
     val friendsList : MutableList<User> = ArrayList()
     val friendsAdapter = FriendsListAdapter(friendsList,
         onFriendClick = {friend ->
-            //TODO("Friend actions dialog")
-             })
+            RemoveFriendDialog(context!!,friend
+            ) { friend ->
+                //TODO("Friend removal")
+            }.show()
+        })
 
     val invitesList : MutableList<User> = ArrayList()
     val invitesAdapter = FriendInviteAdapter(invitesList,
@@ -66,7 +70,11 @@ class FriendsListFragment : BaseFragment() {
 
     private fun setListeners() {
         add_friend.setOnClickListener {
-            TODO("Friend add dialog")
+            InviteFriendDialog(context!!)
+            { invitationEmailAddress ->
+
+                //TODO("Send invite")
+            }.show()
         }
     }
 

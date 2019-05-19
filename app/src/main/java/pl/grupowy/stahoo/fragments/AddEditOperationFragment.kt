@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_add_edit_operation.*
 import pl.grupowy.stahoo.R
 import pl.grupowy.stahoo.entities.MainOperation
 import pl.grupowy.stahoo.fragments.adapters.SubOperationAdapter
+import pl.grupowy.stahoo.fragments.dialogs.AddSplitDialog
 import pl.grupowy.stahoo.models.SubOperation
 import java.text.SimpleDateFormat
 import java.util.*
@@ -119,7 +120,10 @@ class AddEditOperationFragment : BaseFragment(),DatePickerDialog.OnDateSetListen
         if (editMode) add_save_operation.setOnClickListener { saveOperationChanges() }
         else add_save_operation.setOnClickListener { addOperation() }
         add_split.setOnClickListener{
-            //TODO("Add split dialog")
+            AddSplitDialog(context!!){
+                newSplit -> subOperations.add(newSplit)
+                subOperationAdapter.notifyDataSetChanged()
+            }.show()
         }
         operation_date.setOnClickListener {
             val calendar =  Calendar.getInstance()

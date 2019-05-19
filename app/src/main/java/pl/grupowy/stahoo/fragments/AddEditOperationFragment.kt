@@ -40,7 +40,7 @@ class AddEditOperationFragment : BaseFragment(),DatePickerDialog.OnDateSetListen
     override fun layoutRes(): Int = R.layout.fragment_add_edit_operation
 
 
-    val editMode = arguments?.getInt("operationId") != null
+    val editMode = arguments?.getInt("operationId") == null
     var operation = MainOperation()
 
     val subOperations : MutableList<SubOperation> = ArrayList()

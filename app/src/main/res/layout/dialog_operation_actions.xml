@@ -5,29 +5,37 @@
               android:layout_height="wrap_content">
 
     <Button
+            style="@style/StahooButton"
             android:text="Edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/edit_operation"
-            android:layout_marginStart="96dp"
-            android:layout_marginEnd="96dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+
             />
     <Button
+            style="@style/StahooButton"
             android:text="View"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/view_operation"
-            android:layout_marginStart="96dp"
-            android:layout_marginEnd="96dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             />
     <Button
+            style="@style/StahooButton"
             android:text="Delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/delete_operation"
-            android:layout_marginStart="96dp"
-            android:layout_marginEnd="96dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             />
 </LinearLayout>

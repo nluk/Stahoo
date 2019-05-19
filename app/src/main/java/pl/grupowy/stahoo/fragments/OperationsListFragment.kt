@@ -113,8 +113,6 @@ class OperationsListFragment : BaseFragment() {
         )
     }
 
-
-
     private fun fetchDataFromDB() {
         //TODO("Dodać wyciąganie z bazy na podstawie daty")
         //operationsList.addAll(DB.operationsFromDate(operationMonth,operationYear))

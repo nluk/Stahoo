@@ -20,29 +20,68 @@ object NetworkModule {
     @JvmStatic
     internal fun getFullUrl(): String = "${BuildConfig.PROTOCOL}://${BuildConfig.HOST}/${BuildConfig.PATH}/"
 
+    @JvmStatic
+    private val ignoredPathsInJwt: List<String> = ArrayList(
+        listOf(
+            UsersService.SIGN_IN_ENDPOINT, UsersService.REGISTER_ENDPOINT
+        )
+    )
+
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideRetrofit(): Retrofit {
-        return Retrofit.Builder().baseUrl(getFullUrl())
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+    internal fun provideInterceptor() = Interceptor { chain ->
+        val request = chain.request()
+
+        if (ignoredPathsInJwt.contains(request.url().encodedPath()) ||
+            App.store == null ||
+            App.store?.refreshToken.isNullOrEmpty() ||
+            App.store?.accessToken.isNullOrEmpty()
+        ) {
+            return@Interceptor chain.proceed(request)
+        } else {
+            val authRequest = request.newBuilder()
+                .addHeader("Authorization", "Bearer ${App.store!!.accessToken}")
+                .build()
+
+            return@Interceptor chain.proceed(authRequest)
+        }
+
+    }
+
+    @Provides
+    @Reusable
+    @JvmStatic
+    internal fun provideOkHttpClient(interceptor: Interceptor): OkHttpClient {
+        return OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(interceptor)
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }
 
-//    TODO: profourone: Provide OkHttpClient, Interceptor
+    @Provides
+    @Reusable
+    @JvmStatic
+    internal fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder().baseUrl(getFullUrl())
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(okHttpClient)
+            .build()
+    }
 
-//    TODO: profourone: Create OperationsRest (RetrofitInterface for operations), then uncomment
-//    @Provides
-//    @Reusable
-//    @JvmStatic
-//    internal fun provideOperationsRest(retrofit: Retrofit): OperationsRest = retrofit.create(OperationsRest::class.java)
+    @Provides
+    @Reusable
+    @JvmStatic
+    internal fun provideOperationsRest(retrofit: Retrofit): OperationsService =
+        retrofit.create(OperationsService::class.java)
 
-//    TODO: profourone: Create UsersRest (RetrofitInterface for users), then uncomment
-//    @Provides
-//    @Reusable
-//    @JvmStatic
-//    internal fun provideUsersRest(retrofit: Retrofit): UsersRest = retrofit.create(UsersRest::class.java)
+    @Provides
+    @Reusable
+    @JvmStatic
+    internal fun provideUsersService(retrofit: Retrofit): UsersService = retrofit.create(UsersService::class.java)
 
 //    TODO: profourone: Create PartialsRest (RetrofitInterface for partials), then uncomment
 //    @Provides

@@ -34,7 +34,7 @@ class SplashScreenFragment : BaseFragment(), AppInitializer {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initialize()
-        loginWithStoredData();
+        loginWithStoredData()
         initCompletedListener?.onInitCompleted()
     }
 
@@ -42,6 +42,7 @@ class SplashScreenFragment : BaseFragment(), AppInitializer {
         //TODO("Dodać próbę logowania zapisaną sesją")
         var loginSuccesful = true
         if(loginSuccesful) successfulLoginListener?.onSuccessfulLogin("")
+//        findNavController().navigate(R.id.action_login_with_stored_data)
     }
 
 }

@@ -3,7 +3,6 @@ package pl.grupowy.stahoo.activities
 import androidx.navigation.findNavController
 import pl.grupowy.stahoo.R
 import pl.grupowy.stahoo.application.AppInitializer
-import pl.grupowy.stahoo.fragments.LoginFragment
 import pl.grupowy.stahoo.interfaces.SuccessfulLoginListener
 
 class LoginRegisterActivity : BaseActivity(), SuccessfulLoginListener,

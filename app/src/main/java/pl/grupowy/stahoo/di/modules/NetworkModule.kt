@@ -3,10 +3,17 @@ package pl.grupowy.stahoo.di.modules
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import pl.grupowy.stahoo.BuildConfig
+import pl.grupowy.stahoo.application.App
+import pl.grupowy.stahoo.network.services.OperationsService
+import pl.grupowy.stahoo.network.services.UsersService
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 @Module(includes = [ViewModelModule::class])
 object NetworkModule {

@@ -3,7 +3,6 @@ package pl.grupowy.stahoo.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
@@ -16,16 +15,22 @@ import pl.grupowy.stahoo.entities.MainOperation
 import pl.grupowy.stahoo.fragments.adapters.OperationsListAdapter
 import pl.grupowy.stahoo.fragments.dialogs.MonthSelectorDialog
 import pl.grupowy.stahoo.fragments.dialogs.OperationActionDialog
+import pl.grupowy.stahoo.network.services.OperationsService
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 class OperationsListFragment : BaseFragment() {
 
-    val operationsList : MutableList<MainOperation> = ArrayList<MainOperation>()
-    var operationMonth : Int = 0
-    var operationYear : Int = 0
-    var operationsListAdapter : OperationsListAdapter? = null
+    val operationsList: MutableList<MainOperation> = ArrayList<MainOperation>()
+    var operationMonth: Int = 0
+    var operationYear: Int = 0
+    var operationsListAdapter: OperationsListAdapter? = null
 
+    private val TAG = "OperationsListFragment"
+
+    @Inject
+    lateinit var operationsService: OperationsService
 
     @LayoutRes
     override fun layoutRes(): Int = R.layout.fragment_operations_list
@@ -37,7 +42,7 @@ class OperationsListFragment : BaseFragment() {
 
     private fun setAdapter() {
 
-        val adapterOnClick = object : OperationsListAdapter.ClickCallback{
+        val adapterOnClick = object : OperationsListAdapter.ClickCallback {
             override fun onItemClick(position: Int) {
                 val operation = operationsList[position]
                 OperationActionDialog(context!!,
@@ -45,19 +50,19 @@ class OperationsListFragment : BaseFragment() {
                         //TODO("Add operation deleting")
                     },
                     editAction = {
-                        findNavController().navigate(R.id.action_add_or_edit_operation,Bundle().apply {
-                            putInt("operationId",operation.id)
+                        findNavController().navigate(R.id.action_add_or_edit_operation, Bundle().apply {
+                            putInt("operationId", operation.id)
                         })
                     },
                     viewAction = {
-                        findNavController().navigate(R.id.action_view_operation,Bundle().apply {
-                            putInt("operationId",operation.id)
+                        findNavController().navigate(R.id.action_view_operation, Bundle().apply {
+                            putInt("operationId", operation.id)
                         })
                     }
-                    ).show()
+                ).show()
             }
         }
-        operationsListAdapter = OperationsListAdapter(operationsList,adapterOnClick)
+        operationsListAdapter = OperationsListAdapter(operationsList, adapterOnClick)
         operations_recycler.adapter = operationsListAdapter
         operations_recycler.layoutManager = LinearLayoutManager(context)
     }
@@ -72,11 +77,11 @@ class OperationsListFragment : BaseFragment() {
     }
 
     private fun dummyData() {
-        for (id in 1..10){
+        for (id in 1..10) {
             val mo = MainOperation()
             mo.name = "Operacja $id"
-            mo.isDivided = id%2==0
-            mo.isCyclical = id%1==0
+            mo.isDivided = id % 2 == 0
+            mo.isCyclical = id % 1 == 0
             mo.id = id
             operationsList.add(mo)
         }
@@ -84,10 +89,10 @@ class OperationsListFragment : BaseFragment() {
     }
 
     private fun setListeners() {
-        operations_month_selector.setOnClickListener{
+        operations_month_selector.setOnClickListener {
             getMonthFromDialog()
         }
-        operations_year_selector.setOnClickListener{
+        operations_year_selector.setOnClickListener {
             getYearFromDialog()
         }
         add_operation_fab.setOnClickListener {
@@ -95,14 +100,13 @@ class OperationsListFragment : BaseFragment() {
         }
 
         operations_recycler.addOnScrollListener(
-            object: RecyclerView.OnScrollListener() {
-                @Override
+            object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
                     if (dy > 0 && add_operation_fab.visibility == View.VISIBLE) {
-                        add_operation_fab.hide();
+                        add_operation_fab.hide()
                     } else if (dy < 0 && add_operation_fab.visibility != View.VISIBLE) {
-                        add_operation_fab.show();
+                        add_operation_fab.show()
                     }
                 }
             }
@@ -117,8 +121,8 @@ class OperationsListFragment : BaseFragment() {
         //operationsAdapter.notifyDataSetChanged()
     }
 
-    private fun getInitialYearAndMonth(){
-        val calendar =  Calendar.getInstance()
+    private fun getInitialYearAndMonth() {
+        val calendar = Calendar.getInstance()
         operationMonth = calendar[Calendar.MONTH]
         operationYear = calendar[Calendar.YEAR]
     }
@@ -128,21 +132,21 @@ class OperationsListFragment : BaseFragment() {
         operations_year_selector.text = operationYear.toString()
     }
 
-    private fun getYearFromDialog(){
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_year_select,null)
+    private fun getYearFromDialog() {
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_year_select, null)
         AlertDialog.Builder(context!!)
             .setTitle(R.string.select_year)
             .setView(dialogView)
             .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.cancel() }
             .setPositiveButton(R.string.select) { dialog, _ ->
-                operationYear =  (dialog as AlertDialog).operation_year_value.text.toString().toInt()
+                operationYear = (dialog as AlertDialog).operation_year_value.text.toString().toInt()
 
             }
             .create().show()
     }
 
-    private fun getMonthFromDialog(){
-        MonthSelectorDialog(context!!,object: MonthSelectorDialog.OnMonthSelectedHandler{
+    private fun getMonthFromDialog() {
+        MonthSelectorDialog(context!!, object : MonthSelectorDialog.OnMonthSelectedHandler {
             override fun onMonthSelected(whichMonth: Int) {
                 operations_month_selector.text = resources.getStringArray(R.array.months_array)[whichMonth]
                 operationMonth = whichMonth
@@ -150,7 +154,7 @@ class OperationsListFragment : BaseFragment() {
         }).show()
     }
 
-    private fun refresh(){
+    private fun refresh() {
         displayDate()
         fetchDataFromDB()
         operationsListAdapter?.notifyDataSetChanged()

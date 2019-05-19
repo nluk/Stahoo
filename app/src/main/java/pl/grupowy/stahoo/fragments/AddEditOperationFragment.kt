@@ -10,9 +10,7 @@ import android.widget.DatePicker
 import androidx.annotation.LayoutRes
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.dialog_year_select.*
 import kotlinx.android.synthetic.main.fragment_add_edit_operation.*
-
 import pl.grupowy.stahoo.R
 import pl.grupowy.stahoo.entities.MainOperation
 import pl.grupowy.stahoo.fragments.adapters.SubOperationAdapter
@@ -40,7 +38,7 @@ class AddEditOperationFragment : BaseFragment(),DatePickerDialog.OnDateSetListen
     override fun layoutRes(): Int = R.layout.fragment_add_edit_operation
 
 
-    val editMode = arguments?.getInt("operationId") == null
+    val editMode = arguments != null
     var operation = MainOperation()
 
     val subOperations : MutableList<SubOperation> = ArrayList()

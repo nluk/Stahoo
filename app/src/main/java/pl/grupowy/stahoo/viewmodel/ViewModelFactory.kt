@@ -1,6 +1,5 @@
 package pl.grupowy.stahoo.viewmodel
 
-import androidx.annotation.NonNull
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
@@ -12,7 +11,6 @@ class ViewModelFactory
 @Inject
 constructor(private val creators: Map<Class<out ViewModel>, Provider<ViewModel>>) : ViewModelProvider.Factory {
 
-    @NonNull
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         var creator: Provider<out ViewModel>? = creators[modelClass]
         if (creator == null) {

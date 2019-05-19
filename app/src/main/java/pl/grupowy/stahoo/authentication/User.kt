@@ -34,7 +34,10 @@ class User {
     var lastName: String = ""
 
     @Ignore
-    var friends: List<User> = emptyList()
+    var friends: List<Int> = emptyList()
+
+    @Ignore
+    var pending: List<Int> = emptyList()
 
     companion object {
         const val TABLE_NAME = "users"

@@ -11,10 +11,10 @@ abstract class MainActivityFragmentsBindingModule {
     internal abstract fun provideFriendsListFragment(): FriendsListFragment
 
     @ContributesAndroidInjector
-    internal  abstract fun provideAddEditOperationFragment() : AddEditOperationFragment
+    internal abstract fun provideAddEditOperationFragment(): AddEditOperationFragment
 
     @ContributesAndroidInjector
-    internal  abstract fun provideViewOperationFragment() : ViewOperationFragment
+    internal abstract fun provideViewOperationFragment(): ViewOperationFragment
 
     @ContributesAndroidInjector
     internal abstract fun provideOperationsListFragment(): OperationsListFragment

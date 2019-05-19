@@ -22,21 +22,25 @@
                 android:orientation="horizontal"
                 android:weightSum="10">
             <TextView
-
+                    android:textColor="@color/primaryTextColor"
+                    android:background="@color/primaryLightColor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Operation title"
-                    android:textSize="25dp"
+                    android:textSize="15dp"
                     android:id="@+id/operation_title"
                     android:layout_weight="8"
                     />
             <ImageButton
+
+                    android:background="@android:color/transparent"
                     android:id="@+id/operation_is_cyclical"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
 
                     android:layout_weight="1"/>
             <ImageButton
+                    android:background="@android:color/transparent"
                     android:id="@+id/operation_is_shared"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -47,12 +51,13 @@
 
 
             <TextView
+
                     android:id="@+id/operation_amount"
                     android:layout_weight="3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="10 zł"
-                    android:textSize="30dp"
+                    android:textSize="25dp"
                     android:gravity="right"
                     />
 

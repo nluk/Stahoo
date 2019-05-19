@@ -29,6 +29,8 @@
                 >
 
             <TextView
+                    android:background="@color/primaryDarkColor"
+                    android:textColor="@color/primaryTextColor"
                     android:padding="8dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -41,6 +43,8 @@
                     />
 
             <TextView
+                    android:background="@color/primaryDarkColor"
+                    android:textColor="@color/primaryTextColor"
                     android:padding="8dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

@@ -45,7 +45,5 @@ class OperationActionDialog(context : Context, val deleteAction: ActionHandler, 
         }
     }
 
-    interface DeleteAction{
-        fun deleteOperation(operation : MainOperation)
-    }
+
 }

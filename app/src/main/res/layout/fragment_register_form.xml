@@ -11,8 +11,7 @@
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:src="@drawable/user"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#FF000000"
+
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginEnd="8dp"
@@ -47,13 +46,45 @@
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/passwordInput"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/emailInput"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
             android:hint="@string/password"
+            android:fontFamily="monospace"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@id/emailInput"
+            android:layout_marginBottom="8dp"
+
+            />
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/firstnameInput"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/passwordInput"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:hint="@string/first_name"
+            android:fontFamily="monospace"
+            android:textAlignment="center"
+            />
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/lastnameInput"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/firstnameInput"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:hint="@string/last_name"
             android:fontFamily="monospace"
             android:textAlignment="center"
             />
@@ -76,15 +107,27 @@
             />
 
     <Button
+            style="@style/StahooButton"
+
             android:text="@string/register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/registerButton"
             android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@+id/passwordInput"
+            app:layout_constraintTop_toBottomOf="@+id/lastnameInput"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
+            />
+
+    <TextView
+            android:layout_marginBottom="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="login"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             />
 </androidx.constraintlayout.widget.ConstraintLayout>

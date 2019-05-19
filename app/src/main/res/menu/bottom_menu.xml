@@ -4,6 +4,7 @@
             android:id="@+id/operationsListFragment"
             android:title="@string/operations"
             android:icon="@drawable/ic_money"
+
     />
 
 

@@ -1,15 +1,15 @@
 package pl.grupowy.stahoo.fragments.adapters
 
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
-import androidx.navigation.findNavController
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.main_operation_layout.view.*
+import kotlinx.android.synthetic.main.item_main_operation.view.*
 import pl.grupowy.stahoo.R
 import pl.grupowy.stahoo.entities.MainOperation
+import java.security.AccessController.getContext
 
 class OperationsListAdapter(val operationsList : List<MainOperation>, val clickCallback : ClickCallback) : RecyclerView.Adapter<OperationsListAdapter.OperationsViewHolder>() {
 
@@ -25,7 +25,7 @@ class OperationsListAdapter(val operationsList : List<MainOperation>, val clickC
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OperationsViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.main_operation_layout, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_main_operation, parent, false)
         return OperationsViewHolder(v)
     }
 
@@ -39,6 +39,8 @@ class OperationsListAdapter(val operationsList : List<MainOperation>, val clickC
 
 
             itemView.operation_amount.text = operation.amount.toString()
+            if(operation.amount>0.0) itemView.operation_amount.setTextColor(ContextCompat.getColor(itemView.context,R.color.income))
+            else if(operation.amount<0.0) itemView.operation_amount.setTextColor(ContextCompat.getColor(itemView.context,R.color.expense))
             itemView.operation_title.text = operation.name
            if(operation.isCyclical) itemView.operation_is_cyclical.setImageResource(R.drawable.ic_cyclical_operation)
            else itemView.operation_is_cyclical.visibility = GONE

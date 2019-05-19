@@ -16,6 +16,10 @@
     <string name="cancel">Cancel</string>
     <string name="select">Select</string>
     <string name="operation_actions">Operation actions</string>
+    <string name="first_name">first name</string>
+    <string name="last_name">last name</string>
+    <string name="save">save</string>
+    <string name="add">add</string>
 
     <string-array name="months_array">
         <item>January</item>
@@ -32,4 +36,17 @@
         <item>December</item>
     </string-array>
 
+    <string-array name="operation_cyclic">
+        <item>Single</item>
+        <item>Everyday</item>
+        <item>Every week</item>
+        <item>Every month</item>
+    </string-array>
+
+    <string-array name="categories">
+        <item>Food</item>
+        <item>Cosmetics</item>
+        <item>Bills</item>
+        <item>Hobby</item>
+    </string-array>
 </resources>

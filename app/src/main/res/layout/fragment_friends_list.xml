@@ -6,11 +6,70 @@
              tools:context=".fragments.FriendsListFragment"
         >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="FRIENDS_LIST"
-            />
+            >
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+            <LinearLayout
+                    android:weightSum="5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                <TextView
+                        android:background="@color/primaryLightColor"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="Invites"
+                    android:layout_weight="4"
+                    />
+                <Button
+                        android:id="@+id/add_friend"
+                        style="@style/StahooButton"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="Add"
+                        android:layout_weight="1"
+                        />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_margin="8dp"
+                    android:id="@+id/invites_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    ></androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="Friends"
+                    android:background="@color/primaryLightColor"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    />
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_margin="8dp"
+                    android:id="@+id/friends_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    ></androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>

@@ -15,6 +15,8 @@ import pl.grupowy.stahoo.application.App
 import pl.grupowy.stahoo.authentication.Store
 import pl.grupowy.stahoo.authentication.User
 import pl.grupowy.stahoo.authentication.enums.StoreMode
+import pl.grupowy.stahoo.database.repositories.StoreRepository
+import pl.grupowy.stahoo.database.repositories.UserRepository
 import pl.grupowy.stahoo.interfaces.SuccessfulLoginListener
 import pl.grupowy.stahoo.network.form.users.LoginForm
 import pl.grupowy.stahoo.network.response.users.LoginResponse
@@ -33,6 +35,12 @@ class LoginFragment : BaseFragment() {
 
     @Inject
     lateinit var usersService: UsersService
+
+    @Inject
+    lateinit var userRepository: UserRepository
+
+    @Inject
+    lateinit var storeRepository: StoreRepository
 
     override fun layoutRes(): Int = R.layout.fragment_login_register
 
@@ -70,12 +78,12 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun clearForm() {
-        emailInput.text.clear()
+        nicknameInput.text.clear()
         passwordInput.text.clear()
     }
 
     private fun attemptLogin() {
-        val loginForm = LoginForm(emailInput.text.toString(), passwordInput.text.toString())
+        val loginForm = LoginForm(nicknameInput.text.toString(), passwordInput.text.toString())
 
         if (loginForm.username.isBlank() || loginForm.password.isBlank()) {
             return
@@ -91,11 +99,12 @@ class LoginFragment : BaseFragment() {
         usersService.signIn(loginForm)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSuccess {
+                findNavController().navigate(R.id.action_new_login)
+            }
             .subscribe({ result ->
                 saveTokenToCheck(result)
                 authenticateUser()
-
-                findNavController().navigate(R.id.action_new_login)
             }, { it.printStackTrace() })
     }
 
@@ -107,6 +116,7 @@ class LoginFragment : BaseFragment() {
             accessTokenExpiredDate = TimeUtils.calculateExpiredTime(Calendar.MINUTE, 5)
             mode = StoreMode.TOKEN_CHECK.name
         }
+        storeRepository.save(App.store!!)
     }
 
     @SuppressLint("CheckResult")
@@ -123,6 +133,8 @@ class LoginFragment : BaseFragment() {
             mode = StoreMode.LOGGED.name
             authUserId = user.id
         }
+        storeRepository.save(App.store!!)
+        userRepository.save(user)
     }
 
 }

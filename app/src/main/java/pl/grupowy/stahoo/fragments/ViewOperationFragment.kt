@@ -1,24 +1,21 @@
 package pl.grupowy.stahoo.fragments
 
-
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_view_operation.*
-
 import pl.grupowy.stahoo.R
+import pl.grupowy.stahoo.database.repositories.OperationRepository
 import pl.grupowy.stahoo.entities.MainOperation
 import pl.grupowy.stahoo.fragments.adapters.SubOperationAdapter
 import java.text.SimpleDateFormat
-
+import javax.inject.Inject
 
 class ViewOperationFragment : BaseFragment() {
-
+    @Inject
+    lateinit var operationRepository: OperationRepository
 
     @LayoutRes
     override fun layoutRes(): Int = R.layout.fragment_view_operation
@@ -29,9 +26,9 @@ class ViewOperationFragment : BaseFragment() {
         setListeners()
 
         arguments?.get("operationId").run {
-            //val operation = TODO("Get operation by id")
-            //setUpDisplay(operation)
-
+            val id = arguments?.get("operationId") as Int
+            val operation = operationRepository.findById(id)
+            setUpDisplay(operation)
         }
     }
 

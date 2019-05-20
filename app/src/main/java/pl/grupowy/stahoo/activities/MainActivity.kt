@@ -21,5 +21,4 @@ class MainActivity : BaseActivity() {
         val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         bottomNav.setupWithNavController(navController)
     }
-
 }

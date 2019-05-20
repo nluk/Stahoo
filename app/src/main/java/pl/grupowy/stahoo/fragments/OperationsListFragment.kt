@@ -1,5 +1,6 @@
 package pl.grupowy.stahoo.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +9,18 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.dialog_year_select.*
 import kotlinx.android.synthetic.main.fragment_operations_list.*
 import pl.grupowy.stahoo.R
+import pl.grupowy.stahoo.application.App
+import pl.grupowy.stahoo.database.repositories.OperationRepository
 import pl.grupowy.stahoo.entities.MainOperation
 import pl.grupowy.stahoo.fragments.adapters.OperationsListAdapter
 import pl.grupowy.stahoo.fragments.dialogs.MonthSelectorDialog
 import pl.grupowy.stahoo.fragments.dialogs.OperationActionDialog
+import pl.grupowy.stahoo.network.response.users.UserOperationsResponse
 import pl.grupowy.stahoo.network.services.OperationsService
 import java.util.*
 import javax.inject.Inject
@@ -27,10 +33,11 @@ class OperationsListFragment : BaseFragment() {
     var operationYear: Int = 0
     var operationsListAdapter: OperationsListAdapter? = null
 
-    private val TAG = "OperationsListFragment"
-
     @Inject
     lateinit var operationsService: OperationsService
+
+    @Inject
+    lateinit var operationRepository: OperationRepository
 
     @LayoutRes
     override fun layoutRes(): Int = R.layout.fragment_operations_list
@@ -69,23 +76,42 @@ class OperationsListFragment : BaseFragment() {
 
     private fun init() {
 
+        fetchData()
         setListeners()
         setAdapter()
         getInitialYearAndMonth()
         refresh()
-        dummyData()
     }
 
-    private fun dummyData() {
-        for (id in 1..10) {
-            val mo = MainOperation()
-            mo.name = "Operacja $id"
-            mo.isDivided = id % 2 == 0
-            mo.isCyclical = id % 1 == 0
-            mo.id = id
-            operationsList.add(mo)
+    @SuppressLint("CheckResult")
+    private fun fetchData() {
+        if (App.store!!.authUserId == 0) {
+            return
         }
-        operationsListAdapter?.notifyDataSetChanged()
+
+        operationsService.getUserOperations(App.store!!.authUserId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ saveOperationsInDb(it) }, { it.printStackTrace() })
+    }
+
+    private fun saveOperationsInDb(operations: List<UserOperationsResponse>) {
+        if (operations.isNotEmpty()) {
+            operations.forEach {
+                val operation = MainOperation().apply {
+                    id = it.id
+                    costOwnerId = it.fromUser
+                    amount = it.amount
+                    name = it.name
+                    description = it.description
+                    category = it.category
+                    isDivided = it.partials.isNotEmpty()
+                    isCyclical = it.cycleType > 0
+//                    dateTime = SimpleDateFormat("dd-MM-yyyy").parse(it.dateTime)
+                }
+                operationRepository.save(operation)
+            }
+        }
     }
 
     private fun setListeners() {
@@ -115,8 +141,10 @@ class OperationsListFragment : BaseFragment() {
 
     private fun fetchDataFromDB() {
         //TODO("Dodać wyciąganie z bazy na podstawie daty")
-        //operationsList.addAll(DB.operationsFromDate(operationMonth,operationYear))
-        //operationsAdapter.notifyDataSetChanged()
+//        operationsList.addAll(DB.operationsFromDate(operationMonth, operationYear))
+//        operationsList.addAll(operationRepository.findByMonthAndYear(Date()))
+        operationsList.addAll(operationRepository.findAll())
+        operationsListAdapter?.notifyDataSetChanged()
     }
 
     private fun getInitialYearAndMonth() {

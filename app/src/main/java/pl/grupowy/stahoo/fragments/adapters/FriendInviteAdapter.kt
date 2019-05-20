@@ -3,6 +3,8 @@ package pl.grupowy.stahoo.fragments.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_friend_invite.view.*
 import pl.grupowy.stahoo.R
@@ -10,14 +12,22 @@ import pl.grupowy.stahoo.authentication.User
 
 typealias InviteAcceptedCallback = (user : User) -> Unit
 typealias InviteDeclinedCallback = (user : User) -> Unit
-class FriendInviteAdapter(val invitesList : List<User>, val inviteAccepted : InviteAcceptedCallback, val inviteDeclined : InviteDeclinedCallback) : RecyclerView.Adapter<FriendInviteAdapter.FriendInviteViewHolder>() {
+class FriendInviteAdapter(val invitesList : MutableList<User>, val inviteAccepted : InviteAcceptedCallback, val inviteDeclined : InviteDeclinedCallback) : RecyclerView.Adapter<FriendInviteAdapter.FriendInviteViewHolder>() {
 
 
     override fun onBindViewHolder(holder: FriendInviteViewHolder, position: Int) {
         holder.bindItems(invitesList[position])
         holder.itemView.setOnClickListener {
-            if (it.id == R.id.invite_accept) inviteAccepted(invitesList[holder.adapterPosition])
-            else if (it.id == R.id.invite_accept) inviteDeclined(invitesList[holder.adapterPosition])
+            if (it.id == R.id.invite_accept) {
+                inviteAccepted(invitesList[holder.adapterPosition])
+                Toast.makeText(holder.itemView.context,"Invite accepted",LENGTH_SHORT).show()
+            }
+            else if (it.id == R.id.invite_accept) {
+                inviteDeclined(invitesList[holder.adapterPosition])
+                Toast.makeText(holder.itemView.context,"Invite declined",LENGTH_SHORT).show()
+            }
+            invitesList.removeAt(holder.adapterPosition)
+            notifyDataSetChanged()
         }
     }
 

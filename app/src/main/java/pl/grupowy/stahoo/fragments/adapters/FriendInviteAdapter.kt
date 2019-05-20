@@ -17,17 +17,16 @@ class FriendInviteAdapter(val invitesList : MutableList<User>, val inviteAccepte
 
     override fun onBindViewHolder(holder: FriendInviteViewHolder, position: Int) {
         holder.bindItems(invitesList[position])
-        holder.itemView.setOnClickListener {
-            if (it.id == R.id.invite_accept) {
-                inviteAccepted(invitesList[holder.adapterPosition])
-                Toast.makeText(holder.itemView.context,"Invite accepted",LENGTH_SHORT).show()
-            }
-            else if (it.id == R.id.invite_accept) {
+        holder.itemView.invite_accept.setOnClickListener {
+            inviteAccepted(invitesList[holder.adapterPosition])
+            Toast.makeText(holder.itemView.context, "Invite accepted", LENGTH_SHORT).show()
+            removeInviteAndNotify(holder)
+        }
+
+        holder.itemView.invite_decline.setOnClickListener {
                 inviteDeclined(invitesList[holder.adapterPosition])
                 Toast.makeText(holder.itemView.context,"Invite declined",LENGTH_SHORT).show()
-            }
-            invitesList.removeAt(holder.adapterPosition)
-            notifyDataSetChanged()
+                removeInviteAndNotify(holder)
         }
     }
 
@@ -46,4 +45,8 @@ class FriendInviteAdapter(val invitesList : MutableList<User>, val inviteAccepte
         }
     }
 
+    fun removeInviteAndNotify(holder: FriendInviteViewHolder){
+        invitesList.removeAt(holder.adapterPosition)
+        notifyDataSetChanged()
+    }
 }

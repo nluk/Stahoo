@@ -31,7 +31,8 @@ class FriendsListFragment : BaseFragment() {
 
     val invitesList: MutableList<User> = ArrayList()
     val invitesAdapter = FriendInviteAdapter(invitesList,
-        inviteAccepted = { manageInvitation(it, true) },
+        inviteAccepted = {
+            manageInvitation(it, true) },
         inviteDeclined = { manageInvitation(it, false) })
 
     @Inject
